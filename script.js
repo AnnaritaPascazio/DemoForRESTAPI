@@ -26,7 +26,7 @@ app.get('/api/customers', (req, res) => {
 app.get('/api/customers/:id', (req, res) => {
     const customer = customers.find(c => c.id === parseInt(req.params.id));
     if (!customer) {
-        return res.status(404).send('<h2 style="font-family: Malgun Gothic;color:darkred;">Oops... Can\'t find what you are looking for!</h2>');
+         res.status(404).send('<h2 style="font-family: Malgun Gothic;color:darkred;">Oops... Can\'t find what you are looking for!</h2>');
     }
     res.send(customer);
 });
@@ -35,7 +35,7 @@ app.get('/api/customers/:id', (req, res) => {
 app.post('/api/customers', (req, res) => {
     const { error } = validateCustomer(req.body);
     if (error) {
-        return res.status(400).send(error.details[0].message);
+         res.status(400).send(error.details[0].message);
     }
 
     const customer = {
@@ -50,12 +50,13 @@ app.post('/api/customers', (req, res) => {
 app.put('/api/customers/:id', (req, res) => {
     const customer = customers.find(c => c.id === parseInt(req.params.id));
     if (!customer) {
-        return res.status(404).send('<h2 style="font-family: Malgun Gothic;color:darkred;">Customer not found!</h2>');
+      return res.status(404).send('<h2 style="font-family: Malgun Gothic;color:darkred;">Customer not found!</h2>');
     }
 
     const { error } = validateCustomer(req.body);
     if (error) {
-        return res.status(400).send(error.details[0].message);
+      return res.status(400).send(error.details[0].message);
+        
     }
 
     customer.title = req.body.title;
@@ -66,7 +67,7 @@ app.put('/api/customers/:id', (req, res) => {
 app.delete('/api/customers/:id', (req, res) => {
     const customer = customers.find(c => c.id === parseInt(req.params.id));
     if (!customer) {
-        return res.status(404).send('<h2 style="font-family: Malgun Gothic;color:darkred;">Customer not found!</h2>');
+        res.status(404).send('<h2 style="font-family: Malgun Gothic;color:darkred;">Customer not found!</h2>');
     }
 
     const index = customers.indexOf(customer);
